@@ -1,0 +1,43 @@
+{
+    "samplingRate": 50,
+    "numberOfActuators": 6,
+    "channels": [
+        {
+            "patterns": [
+                {
+                    "datapoints": [
+                        {
+                            "intensity": 0,
+                            "time": 0
+                        },
+                        {
+                            "intensity": 20,
+                            "time": 175
+                        },
+                        {
+                            "intensity": 40,
+                            "time": 350
+                        },
+                        {
+                            "intensity": 60,
+                            "time": 500
+                        },
+                        {
+                            "intensity": 80,
+                            "time": 650
+                        },
+                        {
+                            "intensity": 10,
+                            "time": 800
+                        }
+                    ],
+                    "startingTime": 0
+                }
+            ],
+            "actuators": [
+                0,
+                1,2,3,4
+            ]
+        }
+    ]
+}

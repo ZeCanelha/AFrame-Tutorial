@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- Import the vibrotactile component -->
+    <script src="vibrotactile-component.js"></script>
+    <title>Task 5</title>
+</head>
+
+<body>
+    <a-scene>
+        <a-entity position="-2 0 0">
+            <a-camera>
+                <a-cursor></a-cursor>
+            </a-camera>
+        </a-entity>
+        <a-sky color="#ADD8E6"></a-sky>
+        <a-plane position="0 0 -2" rotation="-90 0 0" scale="50 50 1" color="#252525"></a-plane>
+
+        <!-- Attach the vibrotactile component to the <a-box> primitive -->
+
+        <a-box color="#FFAA00" position="0 2 -4">
+            <a-entity geometry="primitive:plane; height: 0.5" position="0 1 0" material="color: #EE9900"
+                text="value: Move your cursor to the box; color: black; wrapCount: 15; align: center"></a-entity>
+        </a-box>
+
+    </a-scene>
+</body>
+
+</html>
