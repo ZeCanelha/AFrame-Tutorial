@@ -6,7 +6,7 @@ A-Frame is a web framework for building virtual reality experiences using HTML a
 
 ## Getting Started
 
-A-Frame can be developed from a plain HTML file without having to install anything. To get started, create an `.html` file and include A-Frame script in the `<head>` tag:
+A-Frame can be developed from a plain HTML file without having to install anything. To get started, create an `.html` file and include the A-Frame script in the `<head>` tag:
 
 ```html
 <html>
@@ -38,29 +38,29 @@ A-Frame can be developed from a plain HTML file without having to install anythi
 
 ## Tutorial
 
-All the a-frame action happens within the `a-scene` component. In the example above, we have the scene tag with a handful of a-frame elements. These elements are called **_primitives_**.
+All the a-frame action happens within the `a-scene` entity. In the example above, we have the scene tag with a handful of a-frame entities. These entities represented as HTML elements are called **_primitives_**.
 
 ### Primitives
 
-Primitives can be described as a 3D object which can take different geometric shapes, such as a box, sphere, or a cylinder. To see every primitive that A-Frame provides, refer to the [A-Frame documentation](https://aframe.io/docs/1.1.0/introduction/), at the bottom of the documentation navigation sidebar.
+Entities or primitives can be described as a 3D object which can take different geometric shapes, such as a box, sphere, or a cylinder. To see every primitive that A-Frame provides, refer to the [A-Frame documentation](https://aframe.io/docs/1.1.0/introduction/), at the bottom of the documentation navigation sidebar.
 
 For this tutorial, we will be focusing on the most basic primitives, detailed in the table below.
 
 | Primitive      | Description                                                         |
 | -------------- | ------------------------------------------------------------------- |
-| `<a-box>`      | The box primitive creates shapes such as boxe, cubs, or walls       |
-| `<a-cylinder>` | The cylinder primitive is used to cBreate tubes and curved surfaces |
+| `<a-box>`      | The box primitive creates shapes such as boxes, cube, or walls       |
+| `<a-cylinder>` | The cylinder primitive is used to create tubes and curved surfaces |
 | `<a-sphere>`   | The sphere primitive creates a spherical or polyhedron shapes       |
 | `<a-plane>`    | The plane primitive is used to create flat surfaces                 |
 | `<a-sky>`      | The sky primitive adds a background color or 360° image to a scene  |
 
 ### Components
 
-If we use the primitives as presented in the Table above, the created primitives appear in their default form. To change its attributes, we associate **_components_** with these entities such as **position**, **rotation**, **color**, and **scale**. In A-Frame, components have the same syntax as an HTML attribute:
+If we use the primitives as presented in the table above, the created primitives appear in their default form. To change its attributes, we associate **_components_** with these entities such as **position**, **rotation**, **color**, and **scale**. In A-Frame, components have the same syntax as an HTML attribute:
 
 `<a-box position="0 0 -4" color="#FF0000"`
 
-The code above creates a red box in the position given by the coordiantes. A-Frame uses a right-handed coordinate system where the negative Z axis extends into the screen.
+The code above creates a red box in the position given by the (0, 0, -4) coordinates. A-Frame uses a right-handed coordinate system where the negative Z axis extends into the screen.
 
 #### Position
 
@@ -102,7 +102,7 @@ The unit of measurement used in A-Frame is the meter. To define the size in A-Fr
 ### Textures and 3D Models
 
 In A-Frame, besides the color, we can also apply textures to the entities in our scene. The process of applying a texture to an entity is very straightforward and we can apply it to every entity in the scene.
-Additionally, A-Frame also provides components for loading 3D models, to further enrich the VR Scene.
+Additionally, A-Frame also provides components for loading 3D models, to further enrich the VR scene.
 A-Frame has an **asset management system** that allows us to place our assets in one place and to preload and cache assets for better performance. We will start here.
 
 #### Asset Management System
@@ -115,7 +115,7 @@ Assets include:
 - `<img>`
 - `<video>`
 
-To set a texture to an entity, we need to specify the `src` property. `src` can be a selector to any element in the asset management system. For example, to set a simple texture to an `<a-box>` primitive, we simply load the texture to the asset management system and specify the source in our primitive.
+To set a texture to an entity, we need to specify the `src` property. `src` can be a selector to any element in the asset management system. It is customary in A-Frame to use ID selectors for assets: we assign an id to the asset in the asset management system, and then use an ID selector in the primitive we want to apply that asset in. For example, to set a simple texture to an `<a-box>` primitive, we simply load the texture to the asset management system, assign it an id of `my-texture` and specify the source in our primitive as being `#my-texture`.
 
 ```html
 <a-scene>
@@ -174,9 +174,9 @@ Refer to the [A-Frame documentation](https://aframe.io/docs/1.0.0/core/entity.ht
 
 ### Creating and register a component
 
-Components of A-Frame's are JavaScript modules that can be mixed, matched, and composed onto entities to build appearance, behavior, and functionality. We can register component in JavaScript and use it declaratively from the DOM. Components are configurable, reusable, and shareable. Most code in an A-Frame application should live within components [[1]](https://aframe.io/docs/1.1.0/introduction/writing-a-component.html).
+Components of A-Frame's are JavaScript modules that can be mixed, matched, and composed onto entities to build appearance, behavior, and functionality. We can register a new component in JavaScript and use it declaratively from the DOM. Components are configurable, reusable, and shareable. Most code in an A-Frame application should live within components [[1]](https://aframe.io/docs/1.1.0/introduction/writing-a-component.html).
 
-To use a component, we first must define him before the `<a-scene>` tag, as example:
+To use a component, we first must define it before the `<a-scene>` tag, as example:
 
 ```html
 <html>
@@ -199,7 +199,7 @@ To use a component, we first must define him before the `<a-scene>` tag, as exam
 
 Let's have a first look to a basic component to get the general idea. This component will log a simple message once when the component’s entity is attached using the `.init()` handler. But first, we need to **register** the component.
 Components are registered with `AFRAME.registerComponent()`. The first argument is the name of the component, which will be used as the HTML attribute name, and for this example it will be `hello-world`. The second is a JavaScript object of methods and properties.
-In the next example, we have our `initi()` handler.
+In the next example, we have our `init()` handler.
 
 ```JavaScript
 AFRAME.registerComponent('hello-world', {
@@ -235,7 +235,7 @@ Refer to the [A-Frame documentation](https://aframe.io/docs/1.1.0/introduction/w
 
 #### Vibrate Component
 
-In A-Frame we can use components created by the community. Here, we will use the [vibrotactile component](https://github.com/ZeCanelha/aframe-vibrotactile-component). This component sends to the user vibrotactile feedback when interacting with scene elements that have the component associated.
+In A-Frame we can use components created by the community. Here, we will use the [vibrotactile component](https://github.com/ZeCanelha/aframe-vibrotactile-component). This component sends  vibrotactile feedback to the user (if (s)he is using a special vibrotactile device) when interacting with scene elements that have the component associated.
 A basic example of its usage:
 
 ```html
@@ -261,42 +261,42 @@ The Vibrotactile component takes two arguments:
 In the example above, when the mouse intersects with the box primitive, it will trigger the vibrations from the `vibrations.json` file.
 
 ### Task List
+Refer to the [examples folder](/Examples/Task1).
 
 #### Task 1
 
-Refer to the [examples folder](/Examples/Task1). Make changes in the example provided to match the following:
+ Make changes in the example `Task1` provided to match the following:
 
 - Change the sky primitive color to `#ADD8E6`
-- Apply a x-axis rotation in the box primitive
-- Change the y-axis position of the sphere
-- Create another box primitive and apply a scale transformation
+- Apply a x-axis rotation of 45º in the box primitive
+- Change the y-axis position of the sphere to 2 meters.
+- Create another box primitive and apply a scale transformation of (3 1 1).
 
-Navigate in the scene using the arrow keys or the wasd controls.
+Navigate in the scene using the arrow keys or the "wasd" controls.
 
 #### Task 2
 
-Refer to the [examples folder](/Examples/Task2). Make changes in the example provided to match the following:
+Make changes in the example `Task2` provided to match the following:
 
-- Apply one texture from the asset management system to the a box primitive.
+- Apply one texture from the asset management system to the box primitive.
 - Apply the "Gas Station" 3D Object Model to the empty entity
 
 #### Task 3
-
-Refer to the [examples folder](/Examples/Task3). Make changes in the example provided to match the following:
+ Make changes in the example `Task3` provided to match the following:
 
 - Apply a translation animation to the `<a-box>` primitive from its initial position to `"2 1.5 -10"`
 
 #### Task 4
 
-Refer to the [examples folder](/Examples/Task4). Make changes in the example provided to match the following:
+Make changes in the example `Task4` provided to match the following:
 
-- Create a cube, similar to the `<a-box>` primitive, using the `<a-entity>` element.
+- Create a cube, similar to the `<a-box>` primitive, using the `<a-entity>` element. **Talvez ser mais especifico aqui... não sei se será facil perceber o pretendido**
 - Set the material color of the entity to `#212121`
 - Set the position to `"2 1.5 -10"`
 
 #### Task 5
 
-Refer to the [examples folder](/Examples/Task5). Make changes in the example provided to match the following:
+Make changes in the example `Task5` provided to match the following:
 
 - Import the vibrotactile component available in the directory.
 - Attach the vibrotactile component to the `<a-box>` primitive.
@@ -313,7 +313,7 @@ If any doubts arise, refer to the [vibrotactile component documentation](https:/
 
 #### Task 6
 
-Refer to the [examples folder](/Examples/Task6). Make changes in the example provided to match the following:
+Make changes in the example provided to match the following:
 
 -
 -
