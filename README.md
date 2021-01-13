@@ -46,13 +46,13 @@ Entities or primitives can be described as a 3D object which can take different 
 
 For this tutorial, we will be focusing on the most basic primitives, detailed in the table below.
 
-| Primitive      | Description                                                         |
-| -------------- | ------------------------------------------------------------------- |
-| `<a-box>`      | The box primitive creates shapes such as boxes, cube, or walls       |
+| Primitive      | Description                                                        |
+| -------------- | ------------------------------------------------------------------ |
+| `<a-box>`      | The box primitive creates shapes such as boxes, cube, or walls     |
 | `<a-cylinder>` | The cylinder primitive is used to create tubes and curved surfaces |
-| `<a-sphere>`   | The sphere primitive creates a spherical or polyhedron shapes       |
-| `<a-plane>`    | The plane primitive is used to create flat surfaces                 |
-| `<a-sky>`      | The sky primitive adds a background color or 360° image to a scene  |
+| `<a-sphere>`   | The sphere primitive creates a spherical or polyhedron shapes      |
+| `<a-plane>`    | The plane primitive is used to create flat surfaces                |
+| `<a-sky>`      | The sky primitive adds a background color or 360° image to a scene |
 
 ### Components
 
@@ -92,9 +92,9 @@ The unit of measurement used in A-Frame is the meter. To define the size in A-Fr
 <a-sphere position="-2 0 -5" radius="0.75" color="red"></a-sphere>
 
 <a-cylinder
-  poisition="0 0 -5"
+  position="0 0 -5"
   radius="1"
-  heigth="1.5"
+  height="1.5"
   color="#212121"
 ></a-cylinder>
 ```
@@ -164,10 +164,20 @@ See more about the animation component in the [A-Frame documentation](https://af
 
 So far we have mentioned entities numerous times during this brief introduction to A-Frame, so what is the definition of an entity? In A-Frame entities are placeholders objects to which we plug in components to provide them appearance, behavior, and functionality.
 
-We can attach components to it to make it render something or do something. To give it shape and appearance, we can attach the **geometry** and **material** components:
+We can attach components to it to make it render something or do something. To give it shape and appearance, we can attach the [geometry](https://aframe.io/docs/1.0.0/components/geometry.html) and [material](https://aframe.io/docs/1.0.0/components/material.html) components.
+The geometry component provides a basic shape fo an entity. The `primitive` property defines the general shape.
+The material component gives appearance to an entity. We can define properties such as color, opacity, or texture.
+Entities are inherently attached with the **position**, **rotation**, and **scale** components.
+Consider the following example:
 
 ```html
-<a-entity geometry="primitive: box" material="color: red"> </a-entity>
+<a-entity
+  geometry="primitive: box"
+  material="color: red"
+  position="2 2 -10"
+  scale="2 2 1"
+>
+</a-entity>
 ```
 
 Refer to the [A-Frame documentation](https://aframe.io/docs/1.0.0/core/entity.html#sidebar) to see further more information.
@@ -215,27 +225,51 @@ Then we can use our `hello-world` component declaratively as an HTML attribute. 
 <html>
   <head>
     <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
-    <!-- Import the vibrotactile component -->
-    <script src="foo-component.js"></script>
+    <!-- Import the hello-world component -->
+    <script src="hello-world.js"></script>
   </head>
   <body>
-    <script>
-      // Or inline before the <a-scene>.
-      AFRAME.registerComponent("bar", {
-        // ...
-      });
-    </script>
-
-    <a-scene> </a-scene>
+    <!-- Attach the component to the scene -->
+    <a-scene hello-world> </a-scene>
   </body>
 </html>
 ```
 
+To set a component, rather than via static HTML , is to set it programmatically with `.setAttribute()`. In the example bellow, we set the `hello-world`component on the scene programmatically:
+
+```JavaScript
+document.querySelector('a-scene').setAttribute('hello-world', '');
+```
+
+Some components have methods available programmatically, and it is not possible to access them directly through HTML. For example, the Vibrotactile component has three internal methods only accessible through JavaScript.
+A component's methods can be accessed through the entity from the `.components` object. Consider this example:
+
+```JavaScript
+AFRAME.registerComponent('foo', {
+  init: function () {
+    this.bar = 'baz';
+  },
+
+  qux: function () {
+    // ...
+  }
+});
+```
+
+To access the `qux`method:
+
+```JavaScript
+var fooComponent = document.querySelector('[foo]').components.foo;
+fooComponent.qux();
+```
+
+We can query for elements containing a component with the attribute selector (i.e., [ COMPONENT_NAME]), as used in the example above.
+
 Refer to the [A-Frame documentation](https://aframe.io/docs/1.1.0/introduction/writing-a-component.html) for more information on creating and register a component.
 
-#### Vibrate Component
+#### Vibrotactile Component {#vibrate}
 
-In A-Frame we can use components created by the community. Here, we will use the [vibrotactile component](https://github.com/ZeCanelha/aframe-vibrotactile-component). This component sends  vibrotactile feedback to the user (if (s)he is using a special vibrotactile device) when interacting with scene elements that have the component associated.
+In A-Frame we can use components created by the community. Here, we will use the [vibrotactile component](https://github.com/ZeCanelha/aframe-vibrotactile-component). This component sends vibrotactile feedback to the user (if (s)he is using a special vibrotactile device) when interacting with scene elements that have the component associated.
 A basic example of its usage:
 
 ```html
@@ -261,16 +295,17 @@ The Vibrotactile component takes two arguments:
 In the example above, when the mouse intersects with the box primitive, it will trigger the vibrations from the `vibrations.json` file.
 
 ### Task List
+
 Refer to the [examples folder](/Examples/Task1).
 
 #### Task 1
 
- Make changes in the example `Task1` provided to match the following:
+Make changes in the example `Task1` provided to match the following:
 
 - Change the sky primitive color to `#ADD8E6`
 - Apply a x-axis rotation of 45º in the box primitive
 - Change the y-axis position of the sphere to 2 meters.
-- Create another box primitive and apply a scale transformation of (3 1 1).
+- Create another box primitive and apply a scale transformation of `3 1 1`.
 
 Navigate in the scene using the arrow keys or the "wasd" controls.
 
@@ -282,7 +317,8 @@ Make changes in the example `Task2` provided to match the following:
 - Apply the "Gas Station" 3D Object Model to the empty entity
 
 #### Task 3
- Make changes in the example `Task3` provided to match the following:
+
+Make changes in the example `Task3` provided to match the following:
 
 - Apply a translation animation to the `<a-box>` primitive from its initial position to `"2 1.5 -10"`
 
@@ -290,18 +326,21 @@ Make changes in the example `Task2` provided to match the following:
 
 Make changes in the example `Task4` provided to match the following:
 
-- Create a cube, similar to the `<a-box>` primitive, using the `<a-entity>` element. **Talvez ser mais especifico aqui... não sei se será facil perceber o pretendido**
-- Set the material color of the entity to `#212121`
-- Set the position to `"2 1.5 -10"`
+Using the `<a-entity>` element provide the following characteristics:
+
+- Give the empty entity the shape and appearance of a yellow (`#FFF200`) cube.
+- Position the yellow cube at `"2 1.5 -10"`
+- Give to another empty entity the shape and appearance of a red (`#FF0000`) sphere.
+- Position the red sphere at `"-2 1.5 -10"` and apply a scale transformation of `2 2 1`.
+
+At this point, we have finished the first section of the A-Frame Tutorial. The main objective was to introduce the basic concepts of this framework. With the knowledge acquired we now want the participant to do two more tasks focused on the use of an external component, the [vibrotactile component](#vibrate).
+After completion, we would like to get feedback on its usability. To do so, all you need to do is answer the questionnaire available at the end of the tasks.
 
 #### Task 5
 
 Make changes in the example `Task5` provided to match the following:
 
-- Import the vibrotactile component available in the directory.
-- Attach the vibrotactile component to the `<a-box>` primitive.
-- Set `vibrations1.json` as the vibration `src`.
-- Set the event as `mouseenter`
+Using the Vibrotactile component available in the directory, create a vibration feedback (`vibrations1.json` available in the directory ) for the red `<a-box>` in the scene. This feedback should trigger when the cursor intercepts the red box.
 
 Since we do not have a vibration device to receive vibrotactile feedback, confirm the following output in the browser console:
 
@@ -313,7 +352,17 @@ If any doubts arise, refer to the [vibrotactile component documentation](https:/
 
 #### Task 6
 
-Make changes in the example provided to match the following:
+Make changes in the example `Task 6` provided to create the following scenario:
 
--
--
+Imagine you intend to go to a predefined location. We want you to create a Vibrotactile GPS that receives vibrotactile feedback depending on how far from the location the user is.
+In this task, we provide a beach scenario with a lighthouse. The objective is to reach the lighthouse, receiving feedback while walking towards it, as illustrated in Figure 1:
+
+![VTEditor preview](https://www.dropbox.com/s/wy0vxll2u17lapt/Task6.jpg?raw=1)
+
+1. When the user is in the blue zone, it should receive a vibration with low intensity, expressed in actuators 5 and 6.
+2. When the user is in the grey zone, it should receive a a vibration with higher intensity, ex pressed in actuators 3,4,5, and 6.
+3. Finally, when the user is in the red zone, it should receive a sin vibration with max intensity in all actuators.
+
+If any doubts arise, refer to the [vibrotactile component documentation](https://github.com/ZeCanelha/aframe-vibrotactile-component).
+
+[Post-Tutorial Questionnaire](https://forms.gle/xFRt1wB8t4DiFRCd7)
