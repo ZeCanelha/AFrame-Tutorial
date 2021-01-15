@@ -340,7 +340,7 @@ After completion, we would like to get feedback on its usability. To do so, all 
 
 Make changes in the example `Task5` provided to match the following:
 
-Use the Vibrotactile to create a scene where there is  vibration feedback (the vibration is defined by the `vibrations1.json` available in the directory ) when the cursor intercepts the red `<a-box>` in the scene. 
+Use the Vibrotactile to create a scene where there is vibration feedback (the vibration is defined by the `vibrations1.json` available in the directory ) when the cursor intercepts the red `<a-box>` in the scene.
 
 Since we do not have a vibration device to receive vibrotactile feedback, confirm the following output in the browser console:
 
@@ -360,9 +360,9 @@ In this task, we provide a beach scenario with a lighthouse. The objective is to
 ![VTEditor preview](https://www.dropbox.com/s/wy0vxll2u17lapt/Task6.jpg?raw=1)
 
 1. When the user is in the light orange zone, there should be no vibration feedback.
-1. When the user is in the blue zone, it should receive a vibration with low intensity (25%), expressed in actuators 5 and 6.
-2. When the user is in the grey zone, it should receive a a vibration with higher intensity (50%), ex pressed in actuators 3,4,5, and 6.
-3. Finally, when the user is in the red zone, it should receive a sin vibration with max intensity in all actuators.
+1. When the user is in the blue zone, it should receive a vibration with low intensity (25%), expressed in actuators 5 and 6, during 500ms.
+1. When the user is in the grey zone, it should receive a a vibration with higher intensity (50%), expressed in actuators 3,4,5, and 6, during 750ms.
+1. Finally, when the user is in the red zone, it should receive a sin vibration with max intensity in all actuators, during 1000ms.
 
 If any doubts arise, refer to the [vibrotactile component documentation](https://github.com/ZeCanelha/aframe-vibrotactile-component).
 

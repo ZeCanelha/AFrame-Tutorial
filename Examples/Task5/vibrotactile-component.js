@@ -23,11 +23,19 @@ const DEFAULT_PHASE = 0;
 const DEFAULT_INITIAL_INTENSITY = 0;
 const DEFAULT_FINAL_INTENSITY = 100;
 
+// Logger messages
+
+const LOGGER = {
+  WARNING_FILE: "Warning: No vibration file specified.",
+  WARNING_EVENT: "Warning: No event associated.",
+  ERROR_LOADING:
+    "Error: Could not load the vibration file. Check your path for errors.",
+};
+
 AFRAME.registerComponent("vibrotactile", {
   schema: {
     src: { type: "string" },
     event: { type: "string" },
-    samplingRate: { type: "number", default: DEFAULT_SAMPLING_RATE },
   },
 
   /**
@@ -41,7 +49,9 @@ AFRAME.registerComponent("vibrotactile", {
   init: function () {
     var self = this;
 
-    this.vibrations = this.loadVibrationsByURL(this.data.src);
+    // If src is defined, load the vibrations
+    if (this.data.src)
+      this.vibrations = this.loadVibrationsByURL(this.data.src);
 
     this.vibrationHandler = function () {
       self.sendVibrations(self.vibrations);
@@ -69,7 +79,10 @@ AFRAME.registerComponent("vibrotactile", {
     if (data.event) {
       el.addEventListener(data.event, this.vibrationHandler);
     } else {
-      console.log("No event associated");
+      console.log(LOGGER.WARNING_EVENT);
+    }
+    if (!data.src) {
+      console.log(LOGGER.WARNING_FILE);
     }
   },
 
@@ -89,9 +102,7 @@ AFRAME.registerComponent("vibrotactile", {
   loadVibrationsByURL: async function (path) {
     const response = await fetch(path);
     if (!response.ok) {
-      throw new Error(
-        "Error loading the vibration file. Check your path for errors."
-      );
+      throw new Error(LOGGER.ERROR_LOADING);
     } else {
       console.log(
         "Vibrations from " + this.data.src + " attached with success"
@@ -99,18 +110,6 @@ AFRAME.registerComponent("vibrotactile", {
     }
     const body = await response.json();
     return body;
-
-    // return await fetch(path)
-    //   .then((response) => {
-    //     if (response.ok) {
-    //       return response.json();
-    //     } else {
-    //       throw new Error(
-    //         "Error loading the vibration file. Check your path for errors."
-    //       );
-    //     }
-    //   })
-    //   .catch((error) => console.log(error));
   },
 
   sendVibrations: function () {
@@ -168,8 +167,7 @@ AFRAME.registerComponent("vibrotactile", {
     };
 
     // this.sendVibrations(body);
-    console.log("Custom vibration attached to the component: \n");
-    console.log(body);
+    console.log("Vibration send with " + patternData);
   },
 
   /**
@@ -217,11 +215,9 @@ AFRAME.registerComponent("vibrotactile", {
     };
 
     // this.sendVibrations(body);
-    console.log("Sin vibration attached\nSin properties:");
-    console.log("Sin properties: ");
-    console.log(sinVibration);
-    console.log("Common parameters: ");
-    console.log(options);
+    console.log(
+      "Sin vibration send with  " + sinVibration + "on actuators: " + actuators
+    );
   },
 
   /**
