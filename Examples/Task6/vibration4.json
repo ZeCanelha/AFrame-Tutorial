@@ -12,17 +12,33 @@
             },
             {
               "intensity": 50,
-              "time": 300
+              "time": 200
+            },
+            {
+              "intensity": 75,
+              "time": 400
             },
             {
               "intensity": 100,
               "time": 600
+            },
+            {
+              "intensity": 75,
+              "time": 800
+            },
+            {
+              "intensity": 50,
+              "time": 1000
+            },
+            {
+              "intensity": 0,
+              "time": 1200
             }
           ],
           "startingTime": 0
         }
       ],
-      "actuators": [0, 1]
+      "actuators": [0, 1, 2, 3]
     }
   ]
 }

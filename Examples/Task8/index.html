@@ -1,0 +1,36 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
+    <!-- Import the vibrotactile component -->
+    <script src="vibrotactile-component.js"></script>
+    <script src="vibration-tutorial.js"></script>
+    <title>Task 8 - Vibrotactile GPS</title>
+</head>
+
+<body>
+    <a-scene vibrotactile gps>
+        <a-assets>
+            <a-asset-item id="lightHouse" src="Lighthouse/lighthouse.gltf"></a-asset-item>
+        </a-assets>
+
+        <a-entity position="0 0 0">
+            <a-camera id="cam" look-controls="pointerLockEnabled: true">
+                <a-cursor></a-cursor>
+            </a-camera>
+        </a-entity>
+        <a-sky color="#ADD8E6"></a-sky>
+        <a-plane position="0 0 -2" rotation="-90 0 0" scale="100 100 1" color="#f5df73"></a-plane>
+        <a-entity id="objective" gltf-model="#lightHouse" position="5 5 -40" scale="4 4 4" rotation="0 270 0">
+
+        </a-entity>
+
+
+
+
+    </a-scene>
+</body>
+
+</html>

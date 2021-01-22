@@ -1,0 +1,32 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://aframe.io/releases/1.1.0/aframe.min.js"></script>
+    <script
+        src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
+    <script src="vibrotactile-component.js"></script>
+    <title>Task 7: Create a simple component</title>
+</head>
+
+<body>
+
+    <a-scene>
+        <a-entity position="0 0 3" environment="preset: japan">
+            <a-camera look-controls="pointerLockEnabled: true">
+                <a-cursor></a-cursor>
+            </a-camera>
+        </a-entity>
+
+        <a-box id="redbox" color="#FF0000" position="-3 0.5 -3.5"></a-box>
+
+        <a-sphere id="sphere" color="#FFAAFF" radius="0.5" position="0 0.5 -4.5"></a-sphere>
+
+        <a-cylinder id="cylinder" color="#FFAA00" height="3" radius="0.5" position="3 1 -2.5"></a-cylinder>
+
+    </a-scene>
+
+</body>
+
+</html>
