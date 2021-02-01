@@ -220,7 +220,8 @@ AFRAME.registerComponent("vibrotactile", {
         JSON.stringify(sinVibration) +
         " on actuators: [ " +
         actuators +
-        "]"
+        "] during " +
+        duration
     );
   },
 
@@ -268,6 +269,13 @@ AFRAME.registerComponent("vibrotactile", {
     };
 
     //this.sendVibrations(body);
-    console.log(body);
+    console.log(
+      "Ramp vibration send with  " +
+        JSON.stringify(rampVibrations) +
+        " on actuators: [ " +
+        actuators +
+        "] during " +
+        duration
+    );
   },
 });

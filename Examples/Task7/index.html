@@ -7,12 +7,13 @@
     <script
         src="https://unpkg.com/aframe-environment-component@1.1.0/dist/aframe-environment-component.min.js"></script>
     <script src="vibrotactile-component.js"></script>
+    <script src="simple-component.js"></script>
     <title>Task 7: Create a simple component</title>
 </head>
 
 <body>
 
-    <a-scene>
+    <a-scene vibrotactile simple-component>
         <a-entity position="0 0 3" environment="preset: japan">
             <a-camera look-controls="pointerLockEnabled: true">
                 <a-cursor></a-cursor>
