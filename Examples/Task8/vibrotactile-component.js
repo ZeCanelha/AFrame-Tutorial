@@ -54,7 +54,8 @@ AFRAME.registerComponent("vibrotactile", {
       this.vibrations = this.loadVibrationsByURL(this.data.src);
 
     this.vibrationHandler = function () {
-      self.sendVibrations(self.vibrations);
+      // self.sendVibrations(self.vibrations);
+      console.log("Sending vibrations");
     };
   },
 
